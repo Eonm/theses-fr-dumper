@@ -1,0 +1,33 @@
+sudo: required
+
+language: rust
+rust :
+  - stable
+  - nightly
+cache: cargo
+
+services:
+  - docker
+
+before_script:
+  - export PATH=$HOME/.cargo/bin:$PATH
+  - cargo install cargo-update || echo "cargo-update already installed"
+  - cargo install cargo-travis || echo "cargo-travis already installed"
+  - cargo install cross
+  - cargo install-update -a
+
+os:
+  - linux
+sudo: false
+cache: cargo
+script:
+  - cargo test --verbose --all
+  - cross build --target aarch64-unknown-linux-gnu
+  - cross build --target x86_64-pc-windows-gnu
+  - cross build --target *-apple-ios
+
+after_success:
+  - cargo coveralls --exclude-pattern=/.cargo,src/download/mod.rs,src/post_processors/mod.rs,src/main.rs
+
+notifications:
+  email: false
