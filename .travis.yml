@@ -4,6 +4,7 @@ language: rust
 rust :
   - stable
   - nightly
+
 cache: cargo
 
 services:
@@ -22,9 +23,9 @@ sudo: false
 cache: cargo
 script:
   - cargo test --verbose --all
-  - cross build --target aarch64-unknown-linux-gnu
-  - cross build --target x86_64-pc-windows-gnu
-  - cross build --target *-apple-ios
+  #- cross build --target aarch64-unknown-linux-gnu
+  #- cross build --target x86_64-pc-windows-gnu
+  #- cross build --target *-apple-ios
 
 after_success:
   - cargo coveralls --exclude-pattern=/.cargo,src/download/mod.rs,src/post_processors/mod.rs,src/main.rs
