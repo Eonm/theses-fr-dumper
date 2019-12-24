@@ -10,11 +10,11 @@
  
 </div>
 
-Theses.fr dumper permet de récupérer les données de theses.fr par lots.
+_Theses.fr dumper_ permet de récupérer les données de [theses.fr](https://www.theses.fr) par lots.
 
 ## Usage
 
-__en utiliasnt un fichier de sortie__
+__en utilisant un fichier de sortie__
 
 ```sh
 theses-fr-dumper -s 0 15 30 -f jsonl -o dump.jsonl
@@ -29,6 +29,8 @@ theses-fr-dumper -s 0 15 30 -f jsonl | grep -i "lorem ipsum"
 ### Création d'une séquence de téléchargement `-s num num num`
 
 La séquence de téléchargement s'exprime de la façon suivante : `-s début incrément fin`.
+
+Si aucune séquence de téléchargement n'est spécifiée _theses.fr dumper_ téléchargera l'ensemble des notices par lot de 10&nbsp;000.
 
 ### Formats de récupération des données `-f`
 
@@ -45,7 +47,7 @@ Sans l'argument `-o` les informations récupérées du serveur sont affichées d
 
 ### Mode de connexion `-m keep-alive/reset`
 
-Theses.fr dumper permet de grader la connexion ouverte avec le serveur grâce à l'option `-m keep-alive`. Tous les lots seront téléchargé par la même connexion.
+_Theses.fr dumper_ permet de grader la connexion ouverte avec le serveur grâce à l'option `-m keep-alive`. Tous les lots seront téléchargé par la même connexion.
 
 > :warning: L'option keep-alive peut entraîner un time out côté serveur. Par défaut chaque téléchargement de lots entraîne la création d'une nouvelle connexion avec le serveur.
 
