@@ -17,7 +17,7 @@ mod url_builder;
 use url_builder::{csv_url_builder, json_url_builder};
 
 mod download;
-use download::{download_in_sequence, DownloadMod};
+use download::{download_in_sequence, DownloadMod, get_total_reccords};
 fn main() {
     let matches = App::new("Theses.fr dumper")
         .version("0.1.0")
@@ -76,7 +76,7 @@ fn main() {
             .collect();
         sequence(s[0], s[1], s[2])
     } else {
-        panic!("-s argument required")
+        sequence(0, 10_000, get_total_reccords().parse::<u32>().expect("Invalid sequence number"))
     };
 
     let post_process = if let Some(output_file) = matches.value_of("output") {
