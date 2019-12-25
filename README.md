@@ -7,6 +7,7 @@
  [![dependency status](https://deps.rs/repo/github/eonm/theses-fr-dumper/status.svg)](https://deps.rs/repo/github/eonm/theses-fr-dumper)
  [![made-with-Rust](https://img.shields.io/badge/Made%20with-Rust-1f425f.svg)](https://www.rust-lang.org/)
  [![License: MIT](https://img.shields.io/badge/License-GPLv3-yellow.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
+ [![dependency status](https://deps.rs/repo/github/eonm/theses-fr-dumper/status.svg)](https://deps.rs/repo/github/eonm/theses-fr-dumper)
  
 </div>
 
