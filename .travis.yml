@@ -19,28 +19,32 @@ addons:
     sources:
       - kalakris-cmake
 
-services:
-  - docker
-
 before_script:
   - export PATH=$HOME/.cargo/bin:$PATH
-  - cargo install cargo-update || echo "cargo-update already installed"
-  - cargo install cargo-travis || echo "cargo-travis already installed"
-  #- cargo install cross
-  - cargo install-update -a
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cargo install cargo-update || echo "cargo-update already installed" ; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cargo install cargo-travis || echo "cargo-travis already installed" ; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cargo install-update -a ; fi
 
 os:
   - linux
-sudo: false
+  - windows
+
 cache: cargo
-script:
-  - cargo test --verbose --all
-  #- cross build --target aarch64-unknown-linux-gnu
-  #- cross build --target x86_64-pc-windows-gnu
-  #- cross build --target *-apple-ios
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_API_KEY
+  file:
+    - target/release/refine-io
+    - target/release/refine-io.exe
+  skip_cleanup: true
+  on:
+    repo: Eonm/refine-io
+    branch: release
+    tags: true
 
 after_success:
-  - cargo coveralls --exclude-pattern=/.cargo,src/download/mod.rs,src/post_processors/mod.rs,src/main.rs
+  -  if [ "$TRAVIS_OS_NAME" = "linux" ]; then cargo coveralls --exclude-pattern=/.cargo,src/main.rs,scr/cli.rs ; fi
 
 notifications:
   email: false
