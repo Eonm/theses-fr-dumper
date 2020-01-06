@@ -35,11 +35,11 @@ deploy:
   provider: releases
   api_key: $GITHUB_API_KEY
   file:
-    - target/release/refine-io
-    - target/release/refine-io.exe
+    - target/release/theses-fr-dumper
+    - target/release/theses-fr-dumper.exe
   skip_cleanup: true
   on:
-    repo: Eonm/refine-io
+    repo: Eonm/theses-fr-dumper
     branch: release
     tags: true
 
