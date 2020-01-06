@@ -1,6 +1,6 @@
 use std::thread;
 use std::time::Duration;
-
+use serde_json;
 use indicatif::ProgressBar;
 
 #[derive(Debug, PartialEq)]
@@ -51,4 +51,11 @@ fn download_data(client: reqwest::RequestBuilder, debounce: Option<u64>) -> Stri
     })
     .join()
     .expect("Faild to start thread")
+}
+
+pub fn get_total_reccords() -> String {
+    reqwest::get("https://www.theses.fr/?q=*:*&format=json&type=avancee&rows=0").expect("Failed to get theses.fr data")
+        .json::<serde_json::value::Value>()
+        .expect("Failed to get json data")["response"]["numFound"]
+        .to_string()
 }
